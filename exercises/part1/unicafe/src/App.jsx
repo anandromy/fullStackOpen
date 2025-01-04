@@ -38,9 +38,10 @@ function App() {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGoodClick}>good</button>
-      <button onClick={handleNeutralClick}>neutral</button>
-      <button onClick={handleBadClick}>bad</button>
+      <Button text={"good"} onClick={handleGoodClick} />
+      <Button text={"neutral"} onClick={handleNeutralClick} />
+      <Button text={"bad"} onClick={handleBadClick} />
+      <h1>statistics</h1>
       <Statistics good={good} neutral={neutral} bad={bad} total={total} average={average} positive={positivePercent} />
     </div>
   )
@@ -50,21 +51,31 @@ const Statistics = ({ good, neutral, bad, total, average, positive }) => {
   if(total == 0) {
     return (
       <div>
-        <h1>statistics</h1>
         <p>No feedback given</p>
       </div>
     )
   }
   return (
     <div>
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {total}</p>
-      <p>average {average}</p>
-      <p>positive {positive} %</p>
+      <StatisticsLine text={"good"} value={good} />
+      <StatisticsLine text={"neutral"} value={neutral} />
+      <StatisticsLine text={"bad"} value={bad} />
+      <StatisticsLine text={"all"} value={total} />
+      <StatisticsLine text={"average"} value={average} />
+      <StatisticsLine text={"postivie"} value={`${positive} %`} />
     </div>
+  )
+}
+
+const Button = ({ text, onClick }) => {
+  return (
+    <button onClick={onClick}>{text}</button>
+  )
+}
+
+const StatisticsLine = ({ text, value }) => {
+  return (
+    <p>{text} {value}</p>
   )
 }
 
