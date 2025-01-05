@@ -26,11 +26,28 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]} has {votes[selected]} votes</p>
       <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <p>{anecdotes[maxVotesIndex(votes)[0]]} has {maxVotesIndex(votes)[1]} votes</p>
+      </div>
     </div>
   )
 }
 
 export default App
+
+const maxVotesIndex = (arr) => {
+  let index = 0
+  let maxVotes = arr[0]
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i] > maxVotes) {
+      maxVotes = arr[i]
+      index = i
+    }
+  }
+  return [index, maxVotes]
+}
